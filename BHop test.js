@@ -60,7 +60,7 @@ function BhopTest() {
         }
           }
         } else {
-          mc.thePlayer.speedInAir = 0.025;
+          mc.thePlayer.speedInAir = 0.02;
           mc.timer.timerSpeed = 1
         }
        if(ticks == 20) {
@@ -68,7 +68,7 @@ function BhopTest() {
        }
 }
     this.onDisable = function () {
-            mc.thePlayer.speedInAir = 0.025;
+            mc.thePlayer.speedInAir = 0.02;
             mc.timer.timerSpeed = 1
     }
 }
