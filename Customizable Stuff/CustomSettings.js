@@ -39,7 +39,7 @@ var bhopResetY = false; //When it gets disabled, do you want to reset MotionY to
 
 //When it gets enabled.
 var flyCheckGround1 = false; //Should it check for ground when doing these actions?
-var flyVClip1 = 0.6; //Do you want to vClip? Default 0.
+var flyVClip1 = 0; //Do you want to vClip? Default 0.
 var flyHClip1 = 0; //Do you want to hClip? Default 0.
 
 //When on ground.
