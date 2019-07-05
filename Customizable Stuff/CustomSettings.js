@@ -12,7 +12,7 @@ var bhopMotionY1 = 0.42; //You can set this to basically anything. 0.42 is legit
 var bhopTimer1 = 1; //Timer. Default is 1
 var bhophClip1 = 0; //Do you want to hClip? Default 0.
 var bhopvClip1 = 0; //Do you want to vClip enstead of jumping? 1.24918707874468 is the jump height. Default 0.
-var bhopSpeedMultiply1 = 1.72 //Ground Speed. I think legit is 1.72
+var bhopSpeedMultiply1 = 1.71 //Ground Speed. I think legit is 1.71
 
 //When the player isn't on ground.
 var bhopTimer2 = 1; //Timer. Default is 1
