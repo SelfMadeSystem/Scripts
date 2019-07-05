@@ -1,115 +1,353 @@
+//Don't edit these stuff.
+var scriptName = "Custom Stuff";
+var scriptVersion = 1.0;
+var scriptAuthor = "Sms_Gamer";
+
+script.import("CustomSettings.js");
+
+var CustomBHop = new CustomBHop();
+var CustomFly = new CustomFly();
+
+var Strafe = moduleManager.getModule("Strafe")
+
+var client;
+var client2;
+
+function CustomBHop() {
+    this.getName = function() {
+        return "CustomBHop"; //Name
+    };
+
+    this.getDescription = function() {
+        return "Custom bHop"; //
+    };
+
+    this.getCategory = function() {
+        return "Movement";
+    };
+    this.onEnable = function() {
+    }
+    this.onUpdate = function() {
+        if ((mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown()) && !mc.thePlayer.isSneaking()) {
+          mc.thePlayer.setSprinting(bhopSetSprinting); //Set sprinting?
+          Strafe.setState(bhopStrafe); //Want strafe?
+          if (mc.thePlayer.onGround) {
+              mc.thePlayer.motionY = bhopMotionY1; //You can set this to basically anything. 0.42 is legit jump motion.
+              timer(bhopTimer1) //Timer. Default is 1
+              hClip(bhophClip1) //Do you want to hClip? Default 0.
+              vClip(bhopvClip1) //Do you want to vClip enstead of jumping? 1.24918707874468 is the jump height. Default 0.
+              speedMultiply(bhopSpeedMultiply1) //Ground Speed. I think legit is 1.72
+          }else{
+            mc.timer.timerSpeed = bhopTimer2; //Timer. Default is 1
+            hClip(bhophClip2) //Do you want to hClip? Default 0.
+        if(bhopMotionYType1 == 0){
+          mc.thePlayer.motionY *= bhopMotionY2;
+        }
+        if(bhopMotionYType1 == 1){
+          mc.thePlayer.motionY += bhopMotionY2;
+        }
+        if(bhopMotionYType1 == 2){
+          mc.thePlayer.motionY -= bhopMotionY2;
+        }
+        if(bhopMotionYType1 == 3){
+          mc.thePlayer.motionY /= bhopMotionY2;
+        }
+        if(bhopMotionYType1 == 4){
+          mc.thePlayer.motionY = bhopMotionY2;
+        }
+            if(mc.thePlayer.motionY <= 0){
+        if(bhopMotionYType2 == 0){
+          mc.thePlayer.motionY *= bhopMotionY2;
+        }
+        if(bhopMotionYType2 == 1){
+          mc.thePlayer.motionY += bhopMotionY3;
+        }
+        if(bhopMotionYType2 == 2){
+          mc.thePlayer.motionY -= bhopMotionY3;
+        }
+        if(bhopMotionYType2 == 3){
+          mc.thePlayer.motionY /= bhopMotionY3;
+        }
+        if(bhopMotionYType2 == 4){
+          mc.thePlayer.motionY = bhopMotionY3;
+        }
+              timer(bhopTimer3) //Timer. Default is 1
+              airSpeed(bhopAirSpeed1) //Sets your speed in air. 0.02 is default.
+            }else{
+        if(bhopMotionYType3 == 0){
+          mc.thePlayer.motionY *= bhopMotionY4;
+        }
+        if(bhopMotionYType3 == 1){
+          mc.thePlayer.motionY += bhopMotionY4;
+        }
+        if(bhopMotionYType3 == 2){
+          mc.thePlayer.motionY -= bhopMotionY4;
+        }
+        if(bhopMotionYType3 == 3){
+          mc.thePlayer.motionY /= bhopMotionY4;
+        }
+        if(bhopMotionYType3 == 4){
+          mc.thePlayer.motionY = bhopMotionY4;
+        }
+              timer(bhopTimer4) //Timer. Default is 1
+              airSpeed(bhopAirSpeed2) //Sets your speed in air. 0.02 is default.
+            }
+          }
+        }else{
+          Strafe.setState(false);
+        }
+}
+    this.onDisable = function () {
+            mc.thePlayer.speedInAir = 0.02;
+            mc.timer.timerSpeed = 1
+            Strafe.setState(false);
+            if(bhopResetXZ){
+              mc.thePlayer.motionX = 0;
+              mc.thePlayer.motionZ = 0;
+            }
+            if(bhopResetY){
+              mc.thePlayer.motionY = 0;
+            }
+    }
+}
+
+function CustomFly() {
+    this.getName = function() {
+        return "CustomFly"; //Name
+    };
+
+    this.getDescription = function() {
+        return "Custom Fly"; //
+    };
+
+    this.getCategory = function() {
+        return "Movement";
+    };
+    this.onEnable = function() {
+      if(mc.thePlayer.onGround || !flyCheckGround1){
+        vClip(flyVClip1)
+        hClip(flyHClip1)
+      }
+    }
+    this.onUpdate = function() {
+      if(mc.thePlayer.onGround){
+        if(flyJump1){
+          mc.thePlayer.jump();
+        }
+        vClip(flyVClip2)
+        hClip(flyHClip2)
+      }
+      if(mc.thePlayer.motionY < 0 & !mc.thePlayer.onGround){
+        if(flyMotionYType1 == 0){
+          mc.thePlayer.motionY *= flyMotionY1;
+        }
+        if(flyMotionYType1 == 1){
+          mc.thePlayer.motionY += flyMotionY1;
+        }
+        if(flyMotionYType1 == 2){
+          mc.thePlayer.motionY -= flyMotionY1;
+        }
+        if(flyMotionYType1 == 3){
+          mc.thePlayer.motionY /= flyMotionY1;
+        }
+        if(flyMotionYType1 == 4){
+          mc.thePlayer.motionY = flyMotionY1;
+        }
+        if(flyMotionXZType1 == 0){
+          mc.thePlayer.motionX *= flyMotionXZ1;
+          mc.thePlayer.motionZ *= flyMotionXZ1;
+        }
+        if(flyMotionXZType1 == 1){
+          mc.thePlayer.motionX /= flyMotionXZ1;
+          mc.thePlayer.motionZ /= flyMotionXZ1;
+        }
+      }
+      if(mc.thePlayer.motionY > 0 & !mc.thePlayer.onGround){
+        if(flyMotionYType2 == 0){
+          mc.thePlayer.motionY *= flyMotionY2;
+        }
+        if(flyMotionYType2 == 1){
+          mc.thePlayer.motionY += flyMotionY2;
+        }
+        if(flyMotionYType2 == 2){
+          mc.thePlayer.motionY -= flyMotionY2;
+        }
+        if(flyMotionYType2 == 3){
+          mc.thePlayer.motionY /= flyMotionY2;
+        }
+        if(flyMotionYType2 == 4){
+          mc.thePlayer.motionY = flyMotionY2;
+        }
+        if(flyMotionXZType2 == 0){
+          mc.thePlayer.motionX *= flyMotionXZ2;
+          mc.thePlayer.motionZ *= flyMotionXZ2;
+        }
+        if(flyMotionXZType2 == 1){
+          mc.thePlayer.motionX /= flyMotionXZ2;
+          mc.thePlayer.motionZ /= flyMotionXZ2;
+        }
+      }
+      if(mc.thePlayer.ticksExisted % flyTicks1 == flyTickse1){
+        if(flyMotionYType3 == 0){
+          mc.thePlayer.motionY *= flyMotionY3;
+        }
+        if(flyMotionYType3 == 1){
+          mc.thePlayer.motionY += flyMotionY3;
+        }
+        if(flyMotionYType3 == 2){
+          mc.thePlayer.motionY -= flyMotionY3;
+        }
+        if(flyMotionYType3 == 3){
+          mc.thePlayer.motionY /= flyMotionY3;
+        }
+        if(flyMotionYType3 == 4){
+          mc.thePlayer.motionY = flyMotionY3;
+        }
+        if(flyMotionXZType3 == 0){
+          mc.thePlayer.motionX *= flyMotionXZ3;
+          mc.thePlayer.motionZ *= flyMotionXZ3;
+        }
+        if(flyMotionXZType3 == 1){
+          mc.thePlayer.motionX /= flyMotionXZ3;
+          mc.thePlayer.motionZ /= flyMotionXZ3;
+        }
+        mc.timer.timerSpeed = flyTimer1;
+        vClip(flyVClip3)
+        hClip(flyHClip3)
+      }
+      if(mc.thePlayer.ticksExisted % flyTicks2 == flyTickse2){
+        if(flyMotionYType4 == 0){
+          mc.thePlayer.motionY *= flyMotionY4;
+        }
+        if(flyMotionYType4 == 1){
+          mc.thePlayer.motionY += flyMotionY4;
+        }
+        if(flyMotionYType4 == 2){
+          mc.thePlayer.motionY -= flyMotionY4;
+        }
+        if(flyMotionYType4 == 3){
+          mc.thePlayer.motionY /= flyMotionY4;
+        }
+        if(flyMotionYType4 == 4){
+          mc.thePlayer.motionY = flyMotionY4;
+        }
+        if(flyMotionXZType4 == 0){
+          mc.thePlayer.motionX *= flyMotionXZ4;
+          mc.thePlayer.motionZ *= flyMotionXZ4;
+        }
+        if(flyMotionXZType4 == 1){
+          mc.thePlayer.motionX /= flyMotionXZ4;
+          mc.thePlayer.motionZ /= flyMotionXZ4;
+        }
+        mc.timer.timerSpeed = flyTimer2;
+        vClip(flyVClip4)
+        hClip(flyHClip4)
+      }
+      if(mc.thePlayer.ticksExisted % flyTicks3 == flyTickse3){
+        if(flyMotionYType5 == 0){
+          mc.thePlayer.motionY *= flyMotionY5;
+        }
+        if(flyMotionYType5 == 1){
+          mc.thePlayer.motionY += flyMotionY5;
+        }
+        if(flyMotionYType5 == 2){
+          mc.thePlayer.motionY -= flyMotionY5;
+        }
+        if(flyMotionYType5 == 3){
+          mc.thePlayer.motionY /= flyMotionY5;
+        }
+        if(flyMotionYType5 == 4){
+          mc.thePlayer.motionY = flyMotionY5
+        }
+        if(flyMotionXZType5 == 0){
+          mc.thePlayer.motionX *= flyMotionXZ5;
+          mc.thePlayer.motionZ *= flyMotionXZ5;
+        }
+        if(flyMotionXZType5 == 1){
+          mc.thePlayer.motionX /= flyMotionXZ5;
+          mc.thePlayer.motionZ /= flyMotionXZ5;
+        }
+        mc.timer.timerSpeed = flyTimer3;
+        vClip(flyVClip5)
+        hClip(flyHClip5)
+      }
+      if(mc.thePlayer.ticksExisted % flyTicks4 == flyTickse4){
+        if(flyMotionYType6 == 0){
+          mc.thePlayer.motionY *= flyMotionY6;
+        }
+        if(flyMotionYType6 == 1){
+          mc.thePlayer.motionY += flyMotionY6;
+        }
+        if(flyMotionYType6 == 2){
+          mc.thePlayer.motionY -= flyMotionY6;
+        }
+        if(flyMotionYType6 == 3){
+          mc.thePlayer.motionY /= flyMotionY6;
+        }
+        if(flyMotionYType6 == 4){
+          mc.thePlayer.motionY = flyMotionY6;
+        }
+        if(flyMotionXZType6 == 0){
+          mc.thePlayer.motionX *= flyMotionXZ6;
+          mc.thePlayer.motionZ *= flyMotionXZ6;
+        }
+        if(flyMotionXZType6 == 1){
+          mc.thePlayer.motionX /= flyMotionXZ6;
+          mc.thePlayer.motionZ /= flyMotionXZ6;
+        }
+        mc.timer.timerSpeed = flyTimer4;
+        vClip(flyVClip6)
+        hClip(flyHClip6)
+      }
+
+      //still onEnable
+    }
+    this.onDisable = function() {
+      mc.timer.timerSpeed = 1;
+    }
+}
+
+ // Converts from degrees to radians.
+ Math.radians = function(degrees) {
+    return degrees * Math.PI / 180;
+  };
+   
+  // Converts from radians to degrees.
+  Math.degrees = function(radians) {
+    return radians * 180 / Math.PI;
+  };
 
 
-// Custom BHop
+function vClip(offset) {
+    mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY + offset, mc.thePlayer.posZ); 
+}
 
+function hClip(offset) {
+    var playerYaw = Math.radians(mc.thePlayer.rotationYaw);
+    mc.thePlayer.setPosition(mc.thePlayer.posX - (Math.sin(playerYaw) * offset), mc.thePlayer.posY, mc.thePlayer.posZ + (Math.cos(playerYaw) * offset));
+}
 
-//At all times.
-var bhopSetSprinting = true; //Set sprinting?
-var bhopStrafe = false; //Want strafe?
+function airSpeed(offset) {
+    mc.thePlayer.speedInAir = offset;
+}
 
-//When the player is on ground.
-var bhopMotionY1 = 0.42; //You can set this to basically anything. 0.42 is legit jump motion.
-var bhopTimer1 = 1; //Timer. Default is 1
-var bhophClip1 = 0; //Do you want to hClip? Default 0.
-var bhopvClip1 = 0; //Do you want to vClip enstead of jumping? 1.24918707874468 is the jump height. Default 0.
-var bhopSpeedMultiply1 = 1.71 //Ground Speed. I think legit is 1.71
+function speedMultiply(offset) {
+  mc.thePlayer.motionX *= offset;
+  mc.thePlayer.motionZ *= offset;
+}
 
-//When the player isn't on ground.
-var bhopTimer2 = 1; //Timer. Default is 1
-var bhophClip2 = 0; //Do you want to hClip? Default 0.
-var bhopMotionY2 = 1; //You can set this to basically anything. Default1.
-var bhopMotionYType1 = 0; //Type of value that bhopMotionY1 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
+function timer(offset){
+  mc.timer.timerSpeed = offset;
+}
 
-//When the player's motionY is lower than 0
-var bhopMotionY3 = 1; //You can set this to basically anything. Default1.
-var bhopMotionYType2 = 0; //Type of value that bhopMotionY2 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var bhopTimer3 = 1; //Timer. Default is 1
-var bhopAirSpeed1 = 0.02; //Sets your speed in air. 0.02 is default.
+function onLoad() {}
 
-//When the player's motionY is higher than 0.
-var bhopMotionY4 = 1; //You can set this to basically anything. Default1.
-var bhopMotionYType3 = 0; //Type of value that bhopMotionY3 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var bhopTimer4 = 1; //Timer. Default is 1
-var bhopAirSpeed2 = 0.02; //Sets your speed in air. 0.02 is default.
+function onEnable() {
+    client = moduleManager.registerModule(CustomBHop);
+    client2 = moduleManager.registerModule(CustomFly);
+}
 
-//When it gets disabled.
-var bhopResetXZ = false; //When it gets disabled, do you want to reset MotionX and MotionZ to 0?
-var bhopResetY = false; //When it gets disabled, do you want to reset MotionY to 0?
-
-
-//Custom Fly.
-
-
-//When it gets enabled.
-var flyCheckGround1 = false; //Should it check for ground when doing these actions?
-var flyVClip1 = 0; //Do you want to vClip? Default 0.
-var flyHClip1 = 0; //Do you want to hClip? Default 0.
-
-//When on ground.
-var flyVClip2 = 0;
-var flyHClip2 = 0;
-var flyJump1 = false;
-
-//When motionY is less than 0
-var flyMotionY1 = 1; //Value for motionY.
-var flyMotionYType1 = 0; //Type of value that flyMotionY1 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var flyMotionXZ1 = 1; //Value for motionX and Z.
-var flyMotionXZType1 = 0; //Type of value that flyMotionXZ1 will do to motionX and Z. 0 is *= (multiply) 1 is /= (divide)
-
-//When motionY is more than 0
-var flyMotionY2 = 1; //Value for motionY.
-var flyMotionYType2 = 0; //Type of value that flyMotionY2 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var flyMotionXZ2 = 1; //Value for motionX and Z.
-var flyMotionXZType2 = 0; //Type of value that flyMotionXZ2 will do to motionX and Z. 0 is *= (multiply) 1 is /= (divide)
-
-//If X ticks is % Z...
-var flyTicks1 = 4;
-var flyTickse1 = 0;
-
-var flyMotionY3 = 1; //Value for motionY.
-var flyMotionYType3 = 0; //Type of value that flyMotionY3 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var flyMotionXZ3 = 1; //Value for motionX and Z.
-var flyMotionXZType3 = 0; //Type of value that flyMotionXZ3 will do to motionX and Z. 0 is *= (multiply) 1 is /= (divide)
-
-var flyTimer1 = 1;
-var flyVClip3 = 0;
-var flyHClip3 = 0;
-
-//If X ticks is % Z... #2
-var flyTicks2 = 4;
-var flyTickse2 = 1;
-
-var flyMotionY4 = 1; //Value for motionY.
-var flyMotionYType4 = 0; //Type of value that flyMotionY3 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var flyMotionXZ4 = 1; //Value for motionX and Z.
-var flyMotionXZType4 = 0; //Type of value that flyMotionXZ3 will do to motionX and Z. 0 is *= (multiply) 1 is /= (divide)
-
-var flyTimer2 = 1;
-var flyVClip4 = 0;
-var flyHClip4 = 0;
-
-//If X ticks is % Z... #3
-var flyTicks3 = 4;
-var flyTickse3 = 2;
-
-var flyMotionY5 = 1; //Value for motionY.
-var flyMotionYType5 = 0; //Type of value that flyMotionY3 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var flyMotionXZ5 = 1; //Value for motionX and Z.
-var flyMotionXZType5 = 0; //Type of value that flyMotionXZ3 will do to motionX and Z. 0 is *= (multiply) 1 is /= (divide)
-
-var flyTimer3 = 1;
-var flyVClip5 = 0;
-var flyHClip5 = 0;
-
-//If X ticks is % Z... #4
-var flyTicks4 = 4;
-var flyTickse4 = 3;
-
-var flyMotionY6 = 1; //Value for motionY.
-var flyMotionYType6 = 0; //Type of value that flyMotionY3 will do to motionY. 0 is *= (multiply) 1 is += (add) 2 is -= (subtract) 3 is /= (divide) 4 is = (set)
-var flyMotionXZ6 = 1; //Value for motionX and Z.
-var flyMotionXZType6 = 0; //Type of value that flyMotionXZ3 will do to motionX and Z. 0 is *= (multiply) 1 is /= (divide)
-
-var flyTimer4 = 1;
-var flyVClip6 = 0;
-var flyHClip6 = 0;
+function onDisable() {
+    moduleManager.unregisterModule(client);
+    moduleManager.unregisterModule(client2);
+}
