@@ -130,6 +130,8 @@ function CustomFly() {
       }
     }
     this.onUpdate = function() {
+      mc.thePlayer.setSprinting(flySetSprinting); //Set sprinting?
+      Strafe.setState(flyStrafe); //Want strafe?
       if(mc.thePlayer.onGround){
         if(flyJump1){
           mc.thePlayer.jump();
@@ -303,7 +305,16 @@ function CustomFly() {
       //still onEnable
     }
     this.onDisable = function() {
-      mc.timer.timerSpeed = 1;
+            mc.thePlayer.speedInAir = 0.02;
+            mc.timer.timerSpeed = 1
+            Strafe.setState(false);
+            if(flyResetXZ){
+              mc.thePlayer.motionX = 0;
+              mc.thePlayer.motionZ = 0;
+            }
+            if(flyResetY){
+              mc.thePlayer.motionY = 0;
+            }
     }
 }
 
