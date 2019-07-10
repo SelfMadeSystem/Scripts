@@ -26,7 +26,7 @@ function Emo() {
     }
     
     this.onUpdate = function() {
-      chat.print("§"+ Math.floor(Math.random()*9)---------------------------)
+      chat.print("§"+ Math.floor(Math.random()*9)+ "--------------------------")
       chat.print("mX: " + mc.thePlayer.motionX);
       chat.print("mY: " + mc.thePlayer.motionY);
       chat.print("mZ: " + mc.thePlayer.motionZ);
