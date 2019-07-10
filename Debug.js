@@ -34,7 +34,7 @@ function Emo() {
       chat.print("posY: " + mc.thePlayer.posY);
       chat.print("posZ: " + mc.thePlayer.posZ);
       chat.print("Timer: " + mc.timer.timerSpeed);
-      chat.print("OnGround: " + mc.timer.onGround);
+      chat.print("OnGround: " + mc.thePlayer.onGround);
       chat.print("Speed: " + speed + " Motion/tick");
       speed = X + Z;
       //mc.thePlayer.timeInPortal = 0;
